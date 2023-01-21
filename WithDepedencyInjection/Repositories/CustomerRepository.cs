@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WithDepedencyInjection.Repositories;
 
-namespace NoDependencyInjection.Repositories
+namespace WithDependencyInjection.Repositories
 {
-    public class CustomerRepository
+    public class CustomerRepository : IRepository
     {
-        private MySQLConnection _connection;
-        //private OracleConnection _connection;
+        private IDbConnection _dbConnection;
 
-        public CustomerRepository()
+        public CustomerRepository(IDbConnection dbConnection)
         { 
-            _connection = new MySQLConnection();
+            _dbConnection= dbConnection;
         }
 
         public List<Customer> GetCustomers() 
         { 
-            if(_connection.GetType() == typeof(MySQLConnection))
+            if(_dbConnection.GetType() == typeof(MySQLConnection))
                 Console.WriteLine("Get customers from MySQL");
 
-            else if (_connection.GetType() == typeof(OracleConnection))
+            else if (_dbConnection.GetType() == typeof(OracleConnection))
                 Console.WriteLine("Get customers from Oracle");
 
             return new List<Customer>

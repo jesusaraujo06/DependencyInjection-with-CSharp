@@ -5,6 +5,8 @@ using NoDependencyInjection.Services;
 var customerService = new CustomerService();
 var CommunicationService = new CommunicationService();
 
+Console.WriteLine("No Dependency Injection");
+
 var customers = customerService.GetCustomers();
 
 var message = "Message to broadcast to all customers";
